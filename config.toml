@@ -1,6 +1,6 @@
 [parity]
 chain = "/etc/parity/l16_parity.json"
-base_path = "/etc/partity/chain_data"
+base_path = "/etc/parity/chain_data"
 auto_update = "none"
 
 [network]
