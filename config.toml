@@ -14,6 +14,12 @@ apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc
 [account]
 password = ["node.pwds"]
 
+[mining]
+engine_signer = ""
+reseal_on_txs = "none"
+force_sealing = true
+
+
 [misc]
 logging = "own_tx=trace"
 log_file = "/var/log/parity.log"
