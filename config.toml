@@ -1,26 +1,5 @@
-[parity]
-chain = "/etc/parity/l16_parity.json"
-base_path = "/etc/parity/chain_data"
-auto_update = "none"
+[Node]
+DataDir = "./l16"
 
-[network]
-port = 30303
-#bootnodes = []
-
-[rpc]
-port = 8545
-apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
-
-[account]
-password = ["node.pwds"]
-
-[mining]
-engine_signer = ""
-reseal_on_txs = "none"
-force_sealing = true
-
-
-[misc]
-logging = "own_tx=trace"
-log_file = "/var/log/parity.log"
-color = true
+[Eth]
+NetworkId = 8995
