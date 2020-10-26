@@ -11,6 +11,9 @@ port = 30303
 port = 8545
 apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
 
+[account]
+password = ["node.pwds"]
+
 [misc]
 logging = "own_tx=trace"
 log_file = "/var/log/parity.log"

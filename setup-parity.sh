@@ -2,6 +2,7 @@
 
 echo "Checking parity installation..."
 
+cd /root
 FILE=/snap/bin/parity
 if ! test -f "$FILE"; then
 
@@ -14,12 +15,11 @@ if ! test -f "$FILE"; then
 
     git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
     cd l16-deploy-node-gcloud
-    #git checkout l16
 
     # move config files
-    sudo mkdir /etc/parity/
-    sudo cp ./config.toml /etc/parity/
-    sudo cp ./l16_parity.json /etc/parity/
+    sudo mkdir /l16
+    sudo cp ./config.toml /l16/
+    sudo cp ./l16_parity.json /l16/
 
     # parity system service
     sudo cp ./parity.service /etc/systemd/system
