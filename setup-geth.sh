@@ -18,8 +18,7 @@ if ! test -f "$FILE"; then
     # move config files
     sudo mkdir /l16
     sudo cp ./geth /l16/
-    sudo cp ./config.toml /l16/
-    sudo cp ./l16_geth.json /l16/
+
 
     # geth system service
     sudo cp ./geth.service /etc/systemd/system
@@ -28,7 +27,7 @@ fi
 
 echo "Starting geth..."
 
-/l16/geth init /l16/l16_geth.json --datadir /l16/chain_data
+/l16/geth --datadir /l16/chain_data account new
 
 sudo systemctl enable geth
 
