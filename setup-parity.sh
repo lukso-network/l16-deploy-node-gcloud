@@ -14,12 +14,13 @@ if ! test -f "$FILE"; then
     sudo snap install parity
 
     git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
+    git checkout parity
     cd l16-deploy-node-gcloud
 
-    # move config files
     sudo mkdir /l16
-    sudo cp ./config.toml /l16/
-    sudo cp ./l16_parity.json /l16/
+
+    #create account
+    sudo parity --base-path=/l16/chain_data account new
 
     # parity system service
     sudo cp ./parity.service /etc/systemd/system
@@ -29,5 +30,3 @@ fi
 echo "Starting parity..."
 
 sudo systemctl enable parity
-
-sudo systemctl start parity
