@@ -24,4 +24,4 @@ sudo chmod +x /l16/geth
 
 gsutil cp ./$NODE_NAME.txt gs://l16-common/addresses
 touch create.lock
-gsutil ./create.lock gs://l16-common/addresses
+gsutil cp ./create.lock gs://l16-common/addresses
