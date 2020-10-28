@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export $NODE_NAME = $(hostname)
+export NODE_NAME = $(hostname)
 
 cd /root
 
