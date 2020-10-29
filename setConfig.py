@@ -11,6 +11,5 @@ with open('config.toml') as f:
     data['Eth']['Miner']['Etherbase'] = address
 
 
-
 with open('/l16/config.toml', 'w') as f:
     toml.dump(data, f)
