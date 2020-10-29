@@ -1,6 +1,6 @@
 [parity]
-chain = "/etc/parity/l16_parity.json"
-base_path = "/etc/parity/chain_data"
+chain = "/l16/genesis-parity.json"
+base_path = "/l16/chain_data"
 auto_update = "none"
 
 [network]
