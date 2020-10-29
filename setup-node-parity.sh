@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #Will be used to identify address
-export NODE_NAME = $(hostname)
-
+export NODE_NAME=$(hostname)
+echo $NODE_NAME
 cd /root
 
 sudo apt-get update
@@ -22,7 +22,7 @@ sudo mkdir /l16
 cp ./node.pwds /l16/
 
 #Create account
-/snap/bin/parity --base-path /l16/chain_data account new --password node.pwds > $NODE_NAME.txt
+/snap/parity/current/usr/bin/parity --base-path /l16/chain_data account new --password node.pwds > $NODE_NAME.txt
 
 #Put address into config
 python3 setConfig.py $NODE_NAME.txt
