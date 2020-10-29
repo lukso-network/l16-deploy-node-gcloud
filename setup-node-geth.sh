@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#Will be used to identify address
 export NODE_NAME = $(hostname)
 
 cd /root
@@ -30,3 +31,12 @@ python3 setConfig.py $NODE_NAME.txt
 gsutil cp ./$NODE_NAME.txt gs://l16-common/addresses
 touch create.lock
 gsutil cp ./create.lock gs://l16-common/addresses
+
+if [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -eq 5 ]
+  then
+    echo "All addresses have been created, proceeding to create genesis."
+    gsutil rm gs://l16-common/addresses/create.lock
+    gsutil cp -r gs://l16-common/addresses .
+    python3 createGenesis.py
+
+fi
