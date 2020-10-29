@@ -22,6 +22,9 @@ sudo chmod +x /l16/geth
 #Create account
 /l16/geth --datadir /l16/chain_data account new --password /l16/node.pwds | grep -Eo '0x[a-fA-F0-9]{40}' > $NODE_NAME.txt
 
+#Put address into config
+python3 setConfig.py $NODE_NAME.txt
+
 gsutil cp ./$NODE_NAME.txt gs://l16-common/addresses
 touch create.lock
 gsutil cp ./create.lock gs://l16-common/addresses

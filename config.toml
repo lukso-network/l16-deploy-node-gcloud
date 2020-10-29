@@ -1,5 +1,11 @@
+[Eth]
+NetworkId = 8995
+
 [Node]
 DataDir = "/l16/chain_data"
 
-[Eth]
-NetworkId = 8995
+[Eth.Miner]
+Etherbase = ""
+
+[Node.P2P]
+NoDiscovery = true
