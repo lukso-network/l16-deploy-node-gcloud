@@ -7,6 +7,8 @@ cd /root
 sudo apt-get update
 
 yes | sudo apt-get install git
+yes | sudo apt-get install python3-pip
+pip3 install toml
 
 git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
 cd l16-deploy-node-gcloud
