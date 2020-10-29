@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Will be used to identify address
-export NODE_NAME = $(hostname)
+export NODE_NAME=$(hostname)
 
 cd /root
 
