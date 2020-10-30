@@ -1,5 +1,6 @@
 [Eth]
 NetworkId = 8995
+SyncMode = "full"
 
 [Node]
 DataDir = "/l16/chain_data"
