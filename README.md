@@ -1,4 +1,4 @@
-# Script to deploy a L15 nodes on Google Cloud Compute
+# Script to deploy a L16 nodes on Google Cloud Compute
 
 ## Deployment
 
