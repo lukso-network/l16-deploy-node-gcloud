@@ -40,7 +40,7 @@ touch create.lock
 gsutil cp ./create.lock gs://l16-common/addresses
 
 #Wait until all nodes will deliver their addresses
-while [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -ne 5  ]; do
+while [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -ne $AUTHORITHIES ]; do
 	#do nothing
 	sleep 5
 done
@@ -57,9 +57,10 @@ if [ `gsutil du gs://l16-common/genesis-geth.json | wc -l` -eq 1 ]
     #No, let's create it and upload to bucket.
   	echo "All addresses have been created, proceeding to create genesis."
     gsutil rm gs://l16-common/addresses/create.lock
-    gsutil cp -r gs://l16-common/addresses/ .
+    gsutil cp -r gs://l16-common/addresses .
     python3 createGenesis.py &&  \
     gsutil cp genesis-geth.json gs://l16-common/
+    sudo cp genesis-geth.json /l16/
 
 fi
 
