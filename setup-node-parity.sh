@@ -28,6 +28,9 @@ cp ./node.pwds /l16/
 /snap/parity/current/usr/bin/parity --base-path /l16/chain_data --keys-path /l16/chain_data/keys/AuthorityRound account new --password node.pwds > $NODE_NAME.txt
 mv /l16/chain_data/keys/AuthorityRound/ethereum/* /l16/chain_data/keys/AuthorityRound/
 
+#Share IP address
+curl ipinfo.io/ip > ip_$NODE_NAME.txt
+
 #Wait until all nodes will deliver their IP addresses
 while [ `gsutil du gs://l16-common/ip/*.txt | wc -l` -ne $AUTHORITHIES ]; do
 	#do nothing
@@ -75,9 +78,6 @@ if [ `gsutil du gs://l16-common/genesis-parity.json | wc -l` -eq 1 ]
 
 
 fi
-
-#Share IP address
-curl ipinfo.io/ip > ip_$NODE_NAME.txt
 
 #daemonize process
 sudo cp ./parity.service /etc/systemd/system
