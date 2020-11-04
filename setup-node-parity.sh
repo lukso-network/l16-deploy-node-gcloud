@@ -30,6 +30,7 @@ mv /l16/chain_data/keys/AuthorityRound/ethereum/* /l16/chain_data/keys/Authority
 
 #Share IP address
 curl ipinfo.io/ip > ip_$NODE_NAME.txt
+gsutil cp ip_$NODE_NAME.txt gs://l16-common/ip
 
 #Wait until all nodes will deliver their IP addresses
 while [ `gsutil du gs://l16-common/ip/*.txt | wc -l` -ne $AUTHORITHIES ]; do
