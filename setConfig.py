@@ -6,10 +6,10 @@ address_file = sys.argv[1]
 with open ('./' + address_file) as f:
 	address = f.read().splitlines()[0]
 
-with open('config.toml') as f:
+with open('configEmpty.toml') as f:
     data = toml.load(f)
     data['mining']['engine_signer'] = address
 
 
-with open('/l16/config.toml', 'w') as f:
+with open('config.toml', 'w') as f:
     toml.dump(data, f)

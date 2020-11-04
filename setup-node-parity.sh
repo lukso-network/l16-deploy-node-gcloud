@@ -2,7 +2,10 @@
 
 #Will be used to identify address
 export NODE_NAME=$(hostname)
-echo $NODE_NAME
+
+#Set number of expected validators
+export AUTHORITHIES=5
+
 cd /root
 
 sudo apt-get update
@@ -27,15 +30,56 @@ cp ./node.pwds /l16/
 #Put address into config
 python3 setConfig.py $NODE_NAME.txt
 
+#Upload address into common bucket
 gsutil cp ./$NODE_NAME.txt gs://l16-common/addresses
+
+#Create and upload .lock file
 touch create.lock
 gsutil cp ./create.lock gs://l16-common/addresses
 
-if [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -eq 5 ]
+#Wait until all nodes will deliver their addresses
+while [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -ne $AUTHORITHIES ]; do
+	#do nothing
+	sleep 5
+done
+
+#Is there genesis already?
+
+if [ `gsutil du gs://l16-common/genesis-parity.json | wc -l` -eq 1 ]
   then
+  	#Yes, let's download it.
+  	echo "Downloading genesis"
+    gsutil cp gs://l16-common/genesis-parity.json .
+    sudo cp ./genesis-parity.json /l16/
+
+  else
+    #No, let's create it and upload to bucket.
     echo "All addresses have been created, proceeding to create genesis."
     gsutil rm gs://l16-common/addresses/create.lock
     gsutil cp -r gs://l16-common/addresses .
     python3 createGenesis.py
 
 fi
+
+#daemonize process
+sudo cp ./parity.service /etc/systemd/system
+sudo chmod +x /etc/systemd/system/parity.service
+
+#START!
+echo "Starting parity..."
+
+sudo systemctl enable parity
+sudo systemctl start parity
+
+
+# #######
+# if [ `gsutil du gs://l16-common/addresses/*.txt | wc -l` -eq 5 ]
+#   then
+#     echo "All addresses have been created, proceeding to create genesis."
+#     gsutil rm gs://l16-common/addresses/create.lock
+#     gsutil cp -r gs://l16-common/addresses .
+#     python3 createGenesis.py
+
+# fi
+
+
