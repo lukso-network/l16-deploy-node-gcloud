@@ -28,6 +28,18 @@ sudo chmod +x /l16/geth
 #Create account
 /l16/geth --datadir /l16/chain_data account new --password /l16/node.pwds | grep -Eo '0x[a-fA-F0-9]{40}' > $NODE_NAME.txt
 
+#Share IP address
+curl ipinfo.io/ip > ip_$NODE_NAME.txt
+gsutil cp ip_$NODE_NAME.txt gs://l16-common/ip
+
+#Wait until all nodes will deliver their IP addresses
+while [ `gsutil du gs://l16-common/ip/*.txt | wc -l` -ne $AUTHORITHIES ]; do
+	#do nothing
+	sleep 5
+done
+
+gsutil cp -r gs://l16-common/ip .
+
 #Put address into config
 python3 setConfig.py $NODE_NAME.txt && \
 sudo cp ./config.toml /l16/
@@ -52,7 +64,7 @@ if [ `gsutil du gs://l16-common/genesis-geth.json | wc -l` -eq 1 ]
   	echo "Downloading genesis"
     gsutil cp gs://l16-common/genesis-geth.json .
     sudo cp ./genesis-geth.json /l16/
-  	
+
   else
     #No, let's create it and upload to bucket.
   	echo "All addresses have been created, proceeding to create genesis."
