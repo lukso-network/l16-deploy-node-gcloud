@@ -12,7 +12,7 @@ port = 8545
 apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
 
 [account]
-password = ["node.pwds"]
+password = ["/l16/node.pwds"]
 
 [mining]
 engine_signer = ""

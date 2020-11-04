@@ -25,10 +25,12 @@ sudo mkdir /l16
 cp ./node.pwds /l16/
 
 #Create account
-/snap/parity/current/usr/bin/parity --base-path /l16/chain_data account new --password node.pwds > $NODE_NAME.txt
+/snap/parity/current/usr/bin/parity --base-path /l16/chain_data --keys-path /l16/chain_data/keys/AuthorityRound account new --password node.pwds > $NODE_NAME.txt
+mv /l16/chain_data/keys/AuthorityRound/ethereum/* /l16/chain_data/keys/AuthorityRound/
 
 #Put address into config
 python3 setConfig.py $NODE_NAME.txt
+cp config.toml /l16/
 
 #Upload address into common bucket
 gsutil cp ./$NODE_NAME.txt gs://l16-common/addresses
