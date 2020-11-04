@@ -57,7 +57,11 @@ if [ `gsutil du gs://l16-common/genesis-parity.json | wc -l` -eq 1 ]
     echo "All addresses have been created, proceeding to create genesis."
     gsutil rm gs://l16-common/addresses/create.lock
     gsutil cp -r gs://l16-common/addresses .
-    python3 createGenesis.py
+    python3 createGenesis.py && \
+    sudo cp ./genesis-parity.json /l16/ && \
+    gsutil cp genesis-parity.json gs://l16-common/
+
+
 
 fi
 
