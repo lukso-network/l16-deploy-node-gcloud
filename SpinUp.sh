@@ -18,7 +18,7 @@ for (( c=0; c<$GETH_NODES; c++ ))
 do
   echo compute instances create l16-node-geth$c --metadata-from-file \
   startup-script=./setup-node-geth.sh --zone=europe-west3-c \
-  --boot-disk-size=50GB;
+  --boot-disk-size=50GB --scopes storage-full;
   sleep 10
 done
 
@@ -27,6 +27,6 @@ for (( c=0; c<$PARITY_NODES; c++ ))
 do
   echo compute instances create l16-node-parity$c --metadata-from-file \
   startup-script=./setup-node-parity.sh --zone=europe-west3-c \
-  --boot-disk-size=50GB;
+  --boot-disk-size=50GB --scopes storage-full;
   sleep 10
 done

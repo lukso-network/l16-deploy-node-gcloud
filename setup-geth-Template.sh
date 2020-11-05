@@ -72,5 +72,4 @@ sudo systemctl enable geth
 #START!
 echo "Starting geth..."
 
-
 #sudo systemctl start geth
