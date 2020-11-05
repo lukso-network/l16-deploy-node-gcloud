@@ -1,6 +1,13 @@
 # Script to deploy a L16 nodes on Google Cloud Compute
 
-## Deployment
+## Deployment (network)
+```bash
+$ git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
+$ cd l16-deploy-node-gcloud
+$ ./SpinUp.sh
+```
+
+## Deployment (single node)
 
 ### Geth
 ```bash
