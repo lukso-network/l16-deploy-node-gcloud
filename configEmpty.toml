@@ -5,7 +5,7 @@ auto_update = "none"
 
 [network]
 port = 30303
-#bootnodes = []
+bootnodes = []
 
 [rpc]
 port = 8545
@@ -14,10 +14,7 @@ apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc
 [account]
 password = ["/l16/node.pwds"]
 
-[mining]
-engine_signer = ""
-reseal_on_txs = "none"
-force_sealing = true
+
 
 
 [misc]
