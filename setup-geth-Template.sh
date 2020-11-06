@@ -69,6 +69,24 @@ sudo cp ./geth.service /etc/systemd/system
 sudo chmod +x /etc/systemd/system/geth.service
 sudo systemctl enable geth
 
+#get enode
+export ENODEID=$(/l16/bootnode -nodekey /l16/chain_data/geth/nodekey -writeaddress)
+export IP=$(curl ipinfo.io/ip)
+export ENODE=$(echo enode://$ENODEID@$IP:30303)
+
+echo $ENODE > enode_$NODE_NAME.txt
+gsutil cp enode_$NODE_NAME.txt gs://$BUCKET_NAME/enodes
+
+#Wait until all enodes are delivered
+while [ `gsutil du gs://$BUCKET_NAME/enodes/*.txt | wc -l` -ne $AUTHORITHIES]; do
+	#do nothing
+	sleep 5
+done
+
+gsutil cp -r gs://$BUCKET_NAME/addresses .
+
+#
+
 #START!
 echo "Starting geth..."
 

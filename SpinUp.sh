@@ -16,16 +16,17 @@ sed  -e "s/<TOTAL>/$TOTAL/g; s/<BUCKET>/$BUCKET/g" setup-parity-Template.sh > se
 #DEPLOY GETH NODES
 for (( c=0; c<$GETH_NODES; c++ ))
 do
-  echo compute instances create l16-node-geth$c --metadata-from-file \
+  gcloud compute instances create l16-node-geth$c --metadata-from-file \
   startup-script=./setup-node-geth.sh --zone=europe-west3-c \
-  --boot-disk-size=50GB --scopes storage-full;
+  --boot-disk-size=50GB --scopes storage-full --image-project=ubuntu-os-cloud \
+  --image-family=ubuntu-2004-lts;
   sleep 10
 done
 
 #DEPLOY PARITY NODES
 for (( c=0; c<$PARITY_NODES; c++ ))
 do
-  echo compute instances create l16-node-parity$c --metadata-from-file \
+  gcloud compute instances create l16-node-parity$c --metadata-from-file \
   startup-script=./setup-node-parity.sh --zone=europe-west3-c \
   --boot-disk-size=50GB --scopes storage-full;
   sleep 10
