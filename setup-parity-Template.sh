@@ -66,6 +66,7 @@ sudo chmod +x /etc/systemd/system/parity.service
 sudo systemctl enable parity
 
 #Start parity to generate node key
+cp configEmpty.toml /l16/config.toml
 sudo systemctl start parity
 wait 3000
 sudo systemctl stop parity
@@ -89,7 +90,6 @@ done
 
 #Put address into config
 python3 setConfig.py $NODE_NAME.txt
-cp config.toml /l16/
 
 gsutil cp -r gs://$BUCKET_NAME/enodes .
 python3 addBootnodes.py && \
@@ -98,4 +98,4 @@ cp config.toml /l16/config.toml
 #START!
 echo "Starting parity..."
 
-#sudo systemctl start parity
+sudo systemctl start parity
