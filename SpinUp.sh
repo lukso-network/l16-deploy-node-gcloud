@@ -28,6 +28,7 @@ for (( c=0; c<$PARITY_NODES; c++ ))
 do
   gcloud compute instances create l16-node-parity$c --metadata-from-file \
   startup-script=./setup-node-parity.sh --zone=europe-west3-c \
-  --boot-disk-size=50GB --scopes storage-full;
+  --boot-disk-size=50GB --scopes storage-full --image-project=ubuntu-os-cloud \
+  --image-family=ubuntu-2004-lts;
   sleep 10
 done
