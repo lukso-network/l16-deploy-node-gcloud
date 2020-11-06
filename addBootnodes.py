@@ -2,7 +2,6 @@ import sys
 import os
 import toml
 
-address_file = sys.argv[1]
 bootnodes = []
 
 for file in os.scandir('./enodes'):
