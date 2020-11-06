@@ -70,6 +70,8 @@ sudo chmod +x /etc/systemd/system/geth.service
 sudo systemctl enable geth
 
 #get enode
+cp bootnode /l16/
+chmod +x /l16/bootnode
 export ENODEID=$(/l16/bootnode -nodekey /l16/chain_data/geth/nodekey -writeaddress)
 export IP=$(curl ipinfo.io/ip)
 export ENODE=$(echo enode://$ENODEID@$IP:30303)
