@@ -38,10 +38,6 @@ mv /l16/chain_data/keys/AuthorityRound/ethereum/* /l16/chain_data/keys/Authority
 curl ipinfo.io/ip > ip_$NODE_NAME.txt
 gsutil cp ip_$NODE_NAME.txt gs://$BUCKET_NAME/ip
 
-#Put address into config
-python3 setConfig.py $NODE_NAME.txt
-cp config.toml /l16/
-
 #Upload address into common bucket
 gsutil cp ./$NODE_NAME.txt gs://$BUCKET_NAME/addresses
 
@@ -68,6 +64,36 @@ gsutil cp genesis-parity.json gs://$BUCKET_NAME/
 sudo cp ./parity.service /etc/systemd/system
 sudo chmod +x /etc/systemd/system/parity.service
 sudo systemctl enable parity
+
+#Start parity to generate node key
+sudo systemctl start parity
+wait 3000
+sudo systemctl stop parity
+
+
+#get enode
+cp bootnode /l16/
+chmod +x /l16/bootnode
+export ENODEID=$(/l16/bootnode -nodekey /l16/chain_data/network/key -writeaddress)
+export IP=$(curl ipinfo.io/ip)
+export ENODE=$(echo enode://$ENODEID@$IP:30303)
+
+echo $ENODE > enode_$NODE_NAME.txt
+gsutil cp enode_$NODE_NAME.txt gs://$BUCKET_NAME/enodes
+
+#Wait until all enodes are delivered
+while [ `gsutil du gs://$BUCKET_NAME/enodes/*.txt | wc -l` -ne $AUTHORITHIES ]; do
+	#do nothing
+	sleep 5
+done
+
+#Put address into config
+python3 setConfig.py $NODE_NAME.txt
+cp config.toml /l16/
+
+gsutil cp -r gs://$BUCKET_NAME/enodes .
+python3 addBootnodes.py && \
+cp config.toml /l16/config.toml
 
 #START!
 echo "Starting parity..."

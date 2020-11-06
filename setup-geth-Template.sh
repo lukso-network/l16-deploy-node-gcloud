@@ -89,8 +89,6 @@ gsutil cp -r gs://$BUCKET_NAME/enodes .
 python3 addBootnodes.py && \
 cp config.toml /l16/config.toml
 
-#
-
 #START!
 echo "Starting geth..."
 
