@@ -68,7 +68,7 @@ sudo systemctl enable parity
 #Start parity to generate node key
 cp configEmpty.toml /l16/config.toml
 sudo systemctl start parity
-wait 3000
+sleep 3
 sudo systemctl stop parity
 
 
