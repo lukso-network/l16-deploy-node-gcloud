@@ -10,3 +10,5 @@ Etherbase = ""
 
 [Node.P2P]
 NoDiscovery = true
+BootstrapNodes = []
+BootstrapNodesV5 = []
