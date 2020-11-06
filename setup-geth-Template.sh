@@ -78,7 +78,7 @@ echo $ENODE > enode_$NODE_NAME.txt
 gsutil cp enode_$NODE_NAME.txt gs://$BUCKET_NAME/enodes
 
 #Wait until all enodes are delivered
-while [ `gsutil du gs://$BUCKET_NAME/enodes/*.txt | wc -l` -ne $AUTHORITHIES]; do
+while [ `gsutil du gs://$BUCKET_NAME/enodes/*.txt | wc -l` -ne $AUTHORITHIES ]; do
 	#do nothing
 	sleep 5
 done
