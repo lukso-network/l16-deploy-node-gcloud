@@ -9,6 +9,5 @@ DataDir = "/l16/chain_data"
 Etherbase = ""
 
 [Node.P2P]
-NoDiscovery = true
 BootstrapNodes = []
 BootstrapNodesV5 = []
