@@ -1,11 +1,11 @@
-# Script to deploy a L16 nodes on Google Cloud Compute
+# Script to deploy an L16 nodes on Google Compute Engine
 
 
 ## Deployment (entire network)
 * Create Google Cloud project
 * In that project create Google Cloud Storage bucket
 * Download repository
-* Run `SpinUp.sh` shell script
+* Run `SpinUp.sh` shell script and provide number of demanded geth nodes, parity nodes and the name of google storage bucket
 
 ```bash
 $ gcloud projects create l16-network
@@ -46,15 +46,13 @@ $ gcloud compute instances create archive-node-parity --metadata-from-file start
 
 ### Genesis
 
-Genesis files, are created under root directory of bucket, seperatley for geth and parity.
+Genesis files, are created under root directory of bucket, separately for geth and parity.
 
 ### Accounts
 
 For security, accounts are created dynamically on the instances, wallet addresses are uploaded into `addresses` folder on a given cloud storage bucket.
 
-### Passwords
 
-Passwords are stored in `node.pwds`.
 
 ### Enode URL's
 
