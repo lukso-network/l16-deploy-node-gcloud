@@ -2,16 +2,24 @@
 
 
 ## Deployment (entire network)
-* Create Google Cloud project
-* In that project create Google Cloud Storage bucket
-* Download repository
-* Run `SpinUp.sh` shell script and provide number of demanded geth nodes, parity nodes and the name of google storage bucket
 
+You need to have authorized `gcloud` SDK on your local machine: https://cloud.google.com/sdk/docs/install
+
+* Create Google Cloud project
 ```bash
 $ gcloud projects create l16-network
+```
+* Create Google Cloud Storage bucket in selected Google Cloud project
+```bash
 $ gsutil mb gs://l16-storage -p l16-network
+```
+* Download repository
+```bash
 $ git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
-$ cd l16-deploy-node-gcloud
+```
+* Run `SpinUp.sh` shell script and provide number of demanded geth nodes, parity nodes and the name of google storage bucket
+```bash
+$ ./SpinUp.sh
 ```
 
 ### Interactive method: 
