@@ -68,7 +68,8 @@ Enode URL's, necessary for synchronization are uploaded into `enodes` folder on 
 
 ### System service
 
-Files `parity.service` and `geth.service` contains service unit configuration 
+Files `parity.service` and `geth.service` contains service unit configuration.
+
 NOTE: For automation purposes geth nodes use `--unlock 0` argument in .service file. 
 This may cause issues in future updates as this way of unlocking may be deprecated.
 
