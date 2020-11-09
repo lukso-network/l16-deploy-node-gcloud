@@ -23,6 +23,7 @@ What's the name of bucket?: l16-storage
 ```
 ### Non-interactive method: 
 ```
+  ./SpinUp.sh --non-interactive --geth [amount] --parity [amount] --bucket [bucket name]
 $ ./SpinUp.sh --non-interactive --geth 3 --parity 2 --bucket l16-storage
 ```
 
@@ -43,13 +44,17 @@ $ gcloud compute instances create archive-node-parity --metadata-from-file start
 
 ## Usage
 
+### Genesis
+
+Genesis files, are created under root directory of bucket, seperatley for geth and parity.
+
 ### Accounts
 
 For security, accounts are created dynamically on the instances, wallet addresses are uploaded into `addresses` folder on a given cloud storage bucket.
 
 ### Passwords
 
-Passwords are stored in `node.pwds`
+Passwords are stored in `node.pwds`.
 
 ### Enode URL's
 
@@ -57,6 +62,6 @@ Enode URL's, necessary for synchronization are uploaded into `enodes` folder on 
 
 ### System service
 
-Files `parity.service` and `geth.service` contains service unit configuration
+Files `parity.service` and `geth.service` contains service unit configuration 
 NOTE: For automation purposes geth nodes use `--unlock 0` argument in .service file. 
 This may cause issues in future updates as this way of unlocking may be deprecated.
