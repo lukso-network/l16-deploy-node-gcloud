@@ -7,10 +7,15 @@ You need to have authorized `gcloud` SDK on your local machine: https://cloud.go
 
 * Create Google Cloud project
 ```bash
+  gcloud projects create [project-name]
 $ gcloud projects create l16-network
+
+  gcloud config set project [project-name]
+$ gcloud config set project l16-network  
 ```
 * Create Google Cloud Storage bucket in selected Google Cloud project
 ```bash
+  gsutil mb gs://[bucket-name] -p [project-name]
 $ gsutil mb gs://l16-storage -p l16-network
 ```
 * Download repository
