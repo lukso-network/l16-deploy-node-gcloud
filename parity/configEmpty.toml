@@ -1,0 +1,23 @@
+[parity]
+chain = "/l16/genesis-parity.json"
+base_path = "/l16/chain_data"
+auto_update = "none"
+
+[network]
+port = 30303
+bootnodes = []
+
+[rpc]
+port = 8545
+apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
+
+[account]
+password = ["/l16/node.pwds"]
+
+
+
+
+[misc]
+logging = "own_tx=trace"
+log_file = "/var/log/parity.log"
+color = true
