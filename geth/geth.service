@@ -1,0 +1,19 @@
+[Unit]
+Description=Geth Ethereum Daemon
+After=network.target
+
+[Service]
+# run as root, set base_path in config.toml
+ExecStart=/l16/geth --config /l16/config.toml --unlock 0 --password /l16/node.pwds --mine
+# To run as user, comment out above and uncomment below, fill in user and group
+# picks up users default config.toml in $HOME/.local/share/io.parity.ethereum/
+# User=username
+# Group=groupname
+Restart=on-failure
+
+# Specifies which signal to use when killing a service. Defaults to SIGTERM.
+# SIGHUP gives parity time to exit cleanly before SIGKILL (default 90s)
+KillSignal=SIGHUP
+
+[Install]
+WantedBy=default.target

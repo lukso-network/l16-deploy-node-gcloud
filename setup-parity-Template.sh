@@ -24,7 +24,7 @@ pip3 install toml
 #Download project files
 git clone https://github.com/lukso-network/l16-deploy-node-gcloud.git
 cd l16-deploy-node-gcloud
-git checkout parity
+git cd parity
 
 sudo mkdir /l16
 

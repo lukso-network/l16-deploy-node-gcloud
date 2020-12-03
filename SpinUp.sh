@@ -1,7 +1,74 @@
 #!/bin/bash
-read -p "Enter number of geth nodes: " GETH_NODES
-read -p "Enter number of parity nodes: " PARITY_NODES
-read -p "What's the name of bucket?: " BUCKET
+
+export INTERACTIVE=true
+export GETH_NODES=0
+export PARITY_NODES=0
+export BUCKET=""
+
+params="$(getopt -o h -l geth:,parity:,bucket:,non-interactive --name \
+"$0" -- "$@")"
+
+while true
+do
+    case "$1" in
+       # This case does nothing but is necessary, getops requires at least one
+       # short option.
+       -h)
+            shift
+            ;;
+
+        --non-interactive)
+            INTERACTIVE=false
+            shift
+            ;;
+
+        --geth)
+          GETH_NODES=$2
+          shift 2
+          ;;
+
+        --parity)
+          PARITY_NODES=$2
+          shift 2
+          ;;
+
+        --bucket)
+          BUCKET=$2
+          shift 2
+          ;;
+
+        --)
+          shift
+          break
+          ;;
+        *)
+          echo "Not implemented: $1" >&2
+          exit 1
+          ;;
+
+    esac
+done
+
+if [ $INTERACTIVE == true ]; then
+
+  CONFIRM_STATUS=false
+  while [ $CONFIRM_STATUS == false ]
+  do
+    read -p "Enter number of geth nodes: " GETH_NODES
+    read -p "Enter number of parity nodes: " PARITY_NODES
+    read -p "What's the name of bucket?: " BUCKET
+    echo
+
+    echo "Geth nodes:    " $GETH_NODES
+    echo "Parity nodes:  " $PARITY_NODES
+    echo "GS Bucket:     " $BUCKET
+    read -p "Confirm? (Y/n) " CONFIRM_CHECK
+    if [ $CONFIRM_CHECK == "Y" ]; then
+      CONFIRM_STATUS=true
+    fi
+  done
+
+fi
 
 export TOTAL=$(echo $GETH_NODES + $PARITY_NODES | bc)
 echo $TOTAL
